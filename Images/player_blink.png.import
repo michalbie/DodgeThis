@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_left.png-ebb9a9e597b07f895d08cea17295b809.stex"
+path="res://.import/player_blink.png-41452dd88a2bc9f4de64211186a9594f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy_left.png"
-dest_files=[ "res://.import/enemy_left.png-ebb9a9e597b07f895d08cea17295b809.stex" ]
+source_file="res://Images/player_blink.png"
+dest_files=[ "res://.import/player_blink.png-41452dd88a2bc9f4de64211186a9594f.stex" ]
 
 [params]
 
