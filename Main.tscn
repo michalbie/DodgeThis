@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+Enemy = ExtResource( 2 )
+Coin = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="picked" from="Player" to="." method="coin_picked"]
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
