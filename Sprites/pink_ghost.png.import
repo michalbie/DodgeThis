@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin.png-b9570e95c4faa8daa07553c426b8ce1b.stex"
+path="res://.import/pink_ghost.png-6d1c7206ce6dd7a460a253c54dc4b672.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/coin.png"
-dest_files=[ "res://.import/coin.png-b9570e95c4faa8daa07553c426b8ce1b.stex" ]
+source_file="res://Sprites/pink_ghost.png"
+dest_files=[ "res://.import/pink_ghost.png-6d1c7206ce6dd7a460a253c54dc4b672.stex" ]
 
 [params]
 

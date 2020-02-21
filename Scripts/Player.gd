@@ -1,7 +1,6 @@
-extends Area2D
+extends KinematicBody2D
 
 signal hit
-signal picked
 
 export var speed = 400
 var screen_size
@@ -9,12 +8,22 @@ var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	disable_player()
+
+func center_player():
+	position.x = screen_size.x/2
+	position.y = screen_size.y/2
+	
+func disable_player():
 	hide()
-	set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled", true)
+
+func enable_player():
 	center_player()
+	show()
+	$CollisionShape2D.set_deferred("disabled", false)
 
-
-func _process(delta):
+func _physics_process(delta):
 	var velocity = Vector2()
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
@@ -26,23 +35,11 @@ func _process(delta):
 		velocity.y -= 1
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.set_frame(0)
-		$AnimatedSprite.stop()
 	
-	position += velocity * delta
+	var collision = move_and_collide(velocity * delta)
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-
-
-func center_player():
-	position.x = screen_size.x/2
-	position.y = screen_size.y/2
-
-
-func _on_Player_body_entered(body):
-	if "Coin" in body.get_name():	#Check what object collided with player
-		emit_signal("picked")
-	else:
+	
+	if collision:
+		disable_player()
 		emit_signal("hit")

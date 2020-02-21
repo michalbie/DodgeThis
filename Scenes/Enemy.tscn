@@ -1,27 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Obstacle.gd" type="Script" id=1]
-[ext_resource path="res://Images/enemy_left.png" type="Texture" id=2]
-[ext_resource path="res://Images/enemy_right.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/pink_ghost.png" type="Texture" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "left",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "right",
+"name": "pink",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 18.9225, 20.5321 )
 
-[node name="Enemy" type="RigidBody2D"]
-position = Vector2( 507.397, 308.431 )
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( -61.2393, 46.0829 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
