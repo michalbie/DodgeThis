@@ -13,8 +13,7 @@ func free_coin():
 	hide()
 	queue_free()
 
-func _on_Coin_body_entered(body):
-	if "Player" in body.get_name():
+func _on_Coin_area_entered(area):
+	if "Player" in area.get_name():
 		free_coin()
 		emit_signal("picked")
-

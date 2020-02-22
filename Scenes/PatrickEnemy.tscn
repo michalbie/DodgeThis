@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/PatrickEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/patrick.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+extents = Vector2( 47.6397, 79.3413 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "moving"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="PatrickEnemy" instance=ExtResource( 1 )]
+position = Vector2( -94.6769, 73.5189 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier2D" parent="." index="1"]
+position = Vector2( 5.41779, -1.61322 )
+scale = Vector2( 4.60883, 7.90304 )
+
+[node name="JumpTimer" type="Timer" parent="." index="2"]
+
+[node name="Sprite" parent="." index="5"]
+position = Vector2( 6.43032, -5.14426 )
+scale = Vector2( 2.87392, 2.89913 )
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 2
+region_rect = Rect2( 269, 111, 0, 3 )
+
+[node name="Animation" type="AnimationPlayer" parent="." index="6"]
+autoplay = "moving"
+anims/moving = SubResource( 3 )
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_JumpTimer_timeout"]

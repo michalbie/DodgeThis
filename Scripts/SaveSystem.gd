@@ -2,6 +2,7 @@ extends Node
 
 var highscore = 0
 
+
 func _ready():
 	load_highscore()
 

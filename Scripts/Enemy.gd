@@ -1,42 +1,46 @@
 extends KinematicBody2D
 
-export var speed = 350
+var speed
 var screen_size
-var velocity
+var ready_to_go = false
+var velocity = Vector2()
 
 
 func _ready():
+	randomize()
 	screen_size = get_viewport_rect().size
-	random_direction()
 	get_node("VisibilityNotifier2D").connect("screen_exited", self, "_on_screen_exited")
-	$AnimatedSprite.animation = "pink" #I will create new types of ghosts
-
-
-func _physics_process(delta):
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	position += velocity * delta
+	disable_sprite()
 
 func _on_screen_exited():
 	queue_free()
-
-func random_direction():
-	velocity = Vector2()
-	randomize()
-	var horizontal_dir = randi()%2
-	var vertical_dir = randi()%2
 	
-	if horizontal_dir == 0:			#left
-		velocity.x = -(randi()%2+1)
-		position.x = randi()%int(screen_size.x) + int(screen_size.x/2)
-	elif horizontal_dir == 1:		#right
-		velocity.x = randi()%2+1
-		position.x = randi()%int(screen_size.x/2)
-		$AnimatedSprite.set_flip_h(true)
-	if vertical_dir == 0:			#down
-		velocity.y = randi()%2+1
-		position.y = 0
-	elif vertical_dir == 1:			#up
-		velocity.y = -(randi()%2+1)
-		position.y = screen_size.y
+func set_speed(new_speed):
+	speed = new_speed
+
+func init_indicator(x, y):
+	$SpawnIndicatorTimer.start(2)
+	show_indicator(x, y)
+	
+func show_indicator(x, y):
+	$SpawnIndicator.position.x = x
+	$SpawnIndicator.position.y = y
+	$SpawnIndicator.show()
+	
+func hide_indicator():
+	$SpawnIndicator.hide()
+	$SpawnIndicator.queue_free()
+
+func _on_SpawnIndicatorTimer_timeout():
+	hide_indicator()
+	$SpawnIndicatorTimer.stop()
+	enable_sprite()
+	ready_to_go = true
+	
+func enable_sprite():
+	$Sprite.show()
+	$CollisionShape2D.set_deferred("disabled", false)
+	
+func disable_sprite():
+	$Sprite.hide()
+	$CollisionShape2D.set_deferred("disabled", true)

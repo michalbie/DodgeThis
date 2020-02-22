@@ -1,31 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/pink_ghost.png" type="Texture" id=2]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "pink",
-"speed": 5.0
-} ]
+[ext_resource path="res://Sprites/indicator.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 18.9225, 20.5321 )
+resource_local_to_scene = true
+extents = Vector2( 19.1732, 20.9394 )
 
 [node name="Enemy" type="KinematicBody2D"]
-position = Vector2( -61.2393, 46.0829 )
+position = Vector2( -62.9974, 51.3571 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -0.953255, 1.05183 )
-scale = Vector2( 3, 3 )
-frames = SubResource( 1 )
-animation = "right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 5.10875, -1.14346 )
@@ -35,3 +19,13 @@ shape = SubResource( 2 )
 position = Vector2( 5.41779, -0.755852 )
 scale = Vector2( 1.95097, 2.07289 )
 
+[node name="SpawnIndicator" type="Sprite" parent="."]
+position = Vector2( 3.51617, 50.9846 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="SpawnIndicatorTimer" type="Timer" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[connection signal="timeout" from="SpawnIndicatorTimer" to="." method="_on_SpawnIndicatorTimer_timeout"]

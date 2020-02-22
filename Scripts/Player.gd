@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 signal hit
 
@@ -36,10 +36,11 @@ func _physics_process(delta):
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
 	
-	var collision = move_and_collide(velocity * delta)
+	velocity = velocity.normalized() * speed
+	position += velocity * delta
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
-	
-	if collision:
-		disable_player()
-		emit_signal("hit")
+
+func _on_Player_body_entered(body):
+	disable_player()
+	emit_signal("hit")

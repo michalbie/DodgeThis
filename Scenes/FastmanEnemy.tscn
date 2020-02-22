@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/FastmanEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/fastman.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+extents = Vector2( 19.1732, 20.9394 )
+
+[node name="FastmanEnemy" instance=ExtResource( 1 )]
+position = Vector2( -54.9218, 46.0829 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="4"]
+position = Vector2( 5.41501, -1.805 )
+scale = Vector2( 1.2166, 1.2527 )
+texture = ExtResource( 3 )
+

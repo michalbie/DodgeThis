@@ -18,4 +18,4 @@ shape = SubResource( 1 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 
-[connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Coin_area_entered"]
